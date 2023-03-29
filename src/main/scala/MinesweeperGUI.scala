@@ -64,6 +64,8 @@ class MinesweeperGUI(rows: Int, columns: Int) {
   def addBoardListener(listener: ActionListener): Unit = {
     for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
       board(i)(j).addActionListener(listener)
+      board(i)(j).putClientProperty("row", i)
+      board(i)(j).putClientProperty("col", j)
     }
   }
 

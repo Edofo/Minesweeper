@@ -49,10 +49,13 @@ object Game {
     })
     MinesweeperGUI.addBoardListener(new ActionListener() {
       override def actionPerformed(e: ActionEvent): Unit = {
+
         val button = e.getSource().asInstanceOf[JButton]
+
         val row = button.getClientProperty("row").asInstanceOf[Int]
         val col = button.getClientProperty("col").asInstanceOf[Int]
         val boardArray = board.getBoard()
+
         if (boardArray(row)(col) == 'X') {
 
           MinesweeperGUI.showMessage("You lost! :(")

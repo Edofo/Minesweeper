@@ -1,0 +1,19 @@
+{
+    "name": "minesweeper",
+    "version": "1.0.0",
+    "description": "Minesweeper with scala",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "scala -classpath . -d . ./src/main/scala/Game.scala"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Edofo/Minesweeper.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Edofo/Minesweeper/issues"
+    },
+    "homepage": "https://github.com/Edofo/Minesweeper#readme"
+}
