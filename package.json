@@ -4,7 +4,9 @@
     "description": "Minesweeper with scala",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "scala -classpath . -d . ./src/main/scala/Game.scala"
+        "start:test": "scala -classpath . -d . ./src/main/scala/Game.scala",
+        "start:2": "scala -classpath . -d . ./src/main/scala/Minesweeper2.scala",
+        "start": "scala -classpath . -d . ./src/main/scala/Main.scala"
     },
     "repository": {
         "type": "git",

@@ -16,9 +16,33 @@ object Game {
 
   val board = new Board(ROWS, COLUMNS, MINES)
 
-//   def main(args: Array[String]): Unit = {
-//     MinesweeperGUI.show()
-//   }
+  def revealCasesAround(row: Int, col: Int): Unit = {
+    // reveal the cases around the current case if case is 0 recursively call
+    for (i <- -1 to 1; j <- -1 to 1) {
+      if (row + i >= 0 && row + i < ROWS && col + j >= 0 && col + j < COLUMNS) {
+        if (
+          board.getBoard()(row + i)(col + j) != 'X' && board.getBoard()(
+            row + i
+          )(col + j) != '0'
+        ) {
+          MinesweeperGUI.setButtonText(
+            row + i,
+            col + j,
+            board.getBoard()(row + i)(col + j).toString
+          )
+          MinesweeperGUI.setButtonEnabled(row + i, col + j, false)
+        } else if (board.getBoard()(row + i)(col + j) == '0') {
+          MinesweeperGUI.setButtonText(
+            row + i,
+            col + j,
+            board.getBoard()(row + i)(col + j).toString
+          )
+          MinesweeperGUI.setButtonEnabled(row + i, col + j, false)
+          revealCasesAround(row + i, col + j)
+        }
+      }
+    }
+  }
 
   def newGame(): Unit = {
     board.newGame()
@@ -65,11 +89,39 @@ object Game {
             MinesweeperGUI.setButtonText(i, j, boardArray(i)(j).toString)
           }
         } else {
-          MinesweeperGUI.setButtonEnabled(row, col, false)
-          MinesweeperGUI.setButtonText(row, col, boardArray(row)(col).toString)
+
+          if (boardArray(row)(col) == '0') {
+            revealCasesAround(row, col)
+          } else {
+            MinesweeperGUI.setButtonText(
+              row,
+              col,
+              boardArray(row)(col).toString
+            )
+            MinesweeperGUI.setButtonEnabled(row, col, false)
+          }
+
+          // Check if the player won
+          var won = true
+
+          for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
+            if (
+              boardArray(i)(j) != 'X' && MinesweeperGUI.getButtonEnabled(
+                i,
+                j
+              )
+            ) {
+              won = false
+            }
+          }
+
+          if (won) {
+            MinesweeperGUI.showMessage("You won! :)")
+          }
         }
       }
     })
+
     newGame()
   }
 }

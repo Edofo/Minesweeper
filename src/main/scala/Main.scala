@@ -1,4 +1,4 @@
-// create a minesweeper game with 10 rows and 10 columns
+// import libraries
 import scala.util.Random
 import java.awt.event.{ActionEvent, ActionListener}
 import javax.swing.{JButton, JFrame, JPanel}
@@ -127,6 +127,10 @@ object Main extends App {
     for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
       board(i)(j).setEnabled(false)
     }
+    // set the text of the buttons
+    for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
+      board(i)(j).setText(board2(i)(j).toString)
+    }
   }
 
   // display the game won message
@@ -136,6 +140,10 @@ object Main extends App {
     // disable all the buttons
     for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
       board(i)(j).setEnabled(false)
+    }
+    // set the text of the buttons
+    for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
+      board(i)(j).setText(board2(i)(j).toString)
     }
   }
 
@@ -165,15 +173,15 @@ object Main extends App {
           }
 
           // check if the game is won
-          var count = 0
+          var win = true
 
           for (i <- 0 until ROWS; j <- 0 until COLUMNS) {
-            if (!board(row)(col).isEnabled) {
-              count += 1
+            if (board2(i)(j) != 'X' && board(i)(j).isEnabled) {
+              win = false
             }
           }
 
-          if (count == ROWS * COLUMNS - MINES) {
+          if (win) {
             gameWon()
           }
         }

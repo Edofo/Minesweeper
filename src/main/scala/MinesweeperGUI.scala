@@ -89,4 +89,8 @@ class MinesweeperGUI(rows: Int, columns: Int) {
     board(row)(column).setEnabled(enabled)
   }
 
+  def getButtonEnabled(row: Int, column: Int): JButton = {
+    board(row)(column)
+  }
+
 }
